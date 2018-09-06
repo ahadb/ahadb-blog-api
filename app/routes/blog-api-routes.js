@@ -32,7 +32,7 @@ module.exports = function(app, db) {
   app.put('/posts/:id', (req, res) => {
     const id = req.params.id
     const details = { '_id': new ObjectID(id) }
-    const note = { text: req.body.body, title: req.body.title }
+      const note = { body: req.body.body, title: req.body.title, description: req.body.description }
     db.collection('posts').update(details, note, (err, result) => {
       if (err) {
         res.send({'error':'An error has occurred'})
