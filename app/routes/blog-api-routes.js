@@ -32,7 +32,12 @@ module.exports = function(app, db) {
   app.put('/posts/:id', (req, res) => {
     const id = req.params.id
     const details = { '_id': new ObjectID(id) }
-      const note = { body: req.body.body, title: req.body.title, description: req.body.description }
+    const note = {
+        content: req.body.content,
+        title: req.body.title,
+        description: req.body.description,
+        date: req.body.date
+    }
     db.collection('posts').update(details, note, (err, result) => {
       if (err) {
         res.send({'error':'An error has occurred'})
@@ -58,9 +63,10 @@ module.exports = function(app, db) {
   // post route
   app.post('/posts', (req, res) => {
     const post = {
-      body: req.body.body,
+      content: req.body.content,
       title: req.body.title,
-      description: req.body.description
+      description: req.body.description,
+      date: req.body.date
     }
     db.collection('posts').insertOne(post, (err, result) => {
       if (err) {
