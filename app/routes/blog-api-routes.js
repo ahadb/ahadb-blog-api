@@ -32,7 +32,7 @@ module.exports = function(app, db) {
   app.put('/posts/:id', (req, res) => {
     const id = req.params.id
     const details = { '_id': new ObjectID(id) }
-    const note = {
+    const post = {
         content: req.body.content,
         title: req.body.title,
         description: req.body.description,
@@ -42,7 +42,7 @@ module.exports = function(app, db) {
       if (err) {
         res.send({'error':'An error has occurred'})
       } else {
-        res.send(note)
+        res.send(post)
       }
     })
   })
